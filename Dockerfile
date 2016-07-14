@@ -11,11 +11,8 @@ RUN apt-get install -y w3c-markup-validator libapache2-mod-perl2 openjdk-8-jdk g
 ADD ./resources/serve-cgi-bin.conf /etc/apache2/conf-available/serve-cgi-bin.conf
 ADD ./resources/supervisord.conf /etc/supervisor/supervisord.conf
 
-RUN sed 's/Allow Private IPs = no/Allow Private IPs = yes/' /etc/w3c/validator.conf >/etc/w3c/validator2.conf
-RUN mv /etc/w3c/validator2.conf /etc/w3c/validator.conf
-
-RUN sed 's/#HTML5/HTML5/' /etc/w3c/validator.conf >/etc/w3c/validator2.conf
-RUN mv /etc/w3c/validator2.conf /etc/w3c/validator.conf
+RUN sed 's/Allow Private IPs = no/Allow Private IPs = yes/' -i /etc/w3c/validator.conf
+RUN sed 's/#HTML5/HTML5/' -i /etc/w3c/validator.conf 
 
 ADD https://github.com/validator/validator/releases/download/15.6.29/vnu.jar_15.6.29.zip /root/build/
 RUN unzip -j /root/build/vnu*.zip -d /root/build/validator.nu
