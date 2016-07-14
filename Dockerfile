@@ -22,5 +22,8 @@ RUN unzip -j /root/build/vnu*.zip -d /root/build/validator.nu
 
 RUN apt-get clean
 
+EXPOSE 80
+EXPOSE 8888
+
 CMD ["/usr/bin/supervisord","-c","/etc/supervisor/supervisord.conf"]
 
